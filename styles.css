@@ -301,3 +301,15 @@ h2 a:hover {
     bottom: 5px;
   }
 }
+
+/* Ajuste para o fundo não dar zoom excessivo no telemóvel */
+@media (max-width: 600px) {
+  .background {
+    /* Em vez de 'cover', usamos 'contain' para ver o desenho inteiro, 
+       ou ajustamos a posição para focar no que importa */
+    background-size: contain; 
+    background-position: top center;
+    background-repeat: repeat-y; /* Repete para baixo se a página for longa */
+    background-attachment: scroll; /* Melhora a performance em telemóveis antigos */
+  }
+}
