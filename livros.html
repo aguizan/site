@@ -52,6 +52,18 @@ livros.forEach(livro => {
     document.getElementById("sinopse-box").style.display = "flex";
   };
 
+  // 👉 ADICIONA O CARD "EM BREVE"
+const cardEmBreve = document.createElement("div");
+cardEmBreve.className = "livro livro-breve"; // Usaremos essa classe para o estilo pontilhado
+
+cardEmBreve.innerHTML = `
+  <div class="moldura-pontilhada">
+    <span>Em breve outro livro para você.</span>
+  </div>
+`;
+
+galeria.appendChild(cardEmBreve);
+
   card.appendChild(img);
   galeria.appendChild(card);
 });

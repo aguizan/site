@@ -322,3 +322,29 @@ h2 a:hover {
     background-repeat: no-repeat;
   }
 }
+
+/* Estilo para o card de "Em Breve" */
+.livro-breve {
+  cursor: default !important; /* Mostra que não é clicável */
+}
+
+.moldura-pontilhada {
+  width: 100%;
+  height: 100%;
+  min-height: 300px; /* Ajuste para ficar do tamanho das suas capas de livro */
+  border: 2px dashed #ccc; /* Linha pontilhada cinza */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05); /* Um fundo bem suave */
+}
+
+.moldura-pontilhada span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+}
