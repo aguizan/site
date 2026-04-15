@@ -261,3 +261,43 @@ h2 a:hover {
   font-size: 12px;
   color: #fdfcfc;
 }
+
+/* Adicione isso ao final do seu styles.css */
+@media (max-width: 600px) {
+  .galeria {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Cabe mais imagens por linha */
+    gap: 5px; /* Diminui o espaço entre elas */
+    padding: 10px;
+  }
+
+  .galeria img, .galeria video {
+    max-width: 100%; /* Garante que não ultrapasse a tela */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Diminui o título do site */
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-lateral {
+    width: 80%; /* Ocupa 80% da tela em vez de um tamanho fixo */
+    right: -80%;
+  }
+  
+  .menu-lateral.ativo {
+    right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .seta-cupido {
+    width: 45px; /* Seta um pouco menor no celular */
+    height: 45px;
+  }
+
+  .footer-site {
+    font-size: 10px; /* Texto do Copyright menor */
+    bottom: 5px;
+  }
+}
