@@ -1,7 +1,8 @@
+/* GERAL */
 body {
   margin: 0;
   font-family: 'Century Gothic', Arial, sans-serif;
-  background: #ffffff00;
+  background: transparent;
   color: #333;
   text-align: center;
 }
@@ -27,12 +28,23 @@ header p {
   margin: 0 auto 20px;
 }
 
-/* GALERIA */
+/* FUNDO FIXO */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("fundo.svg") center/cover no-repeat;
+  z-index: -1;
+}
+
+/* GALERIA (LAYOUT EM GRADE) */
 .galeria {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 300px));
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   padding: 20px;
 }
 
@@ -51,6 +63,46 @@ header p {
   transform: scale(1.03);
 }
 
+/* LIVROS (ESTILO VERTICAL) */
+.livro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.livro img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  aspect-ratio: auto; /* Mantém proporção da capa do livro */
+  object-fit: contain;
+}
+
+/* CARD EM BREVE (PLACEHOLDER) */
+.placeholder {
+  width: 200px; /* Mesma largura da capa do livro */
+  height: 280px; /* Altura aproximada de um livro */
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: default;
+  margin: 0 auto;
+}
+
+.placeholder span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+  line-height: 1.4;
+}
+
 /* LIGHTBOX */
 .lightbox {
   display: none;
@@ -60,10 +112,8 @@ header p {
   width: 100vw;
   height: 100vh;
   background: rgba(0,0,0,0.95);
-
   justify-content: center;
   align-items: center;
-
   z-index: 9999;
 }
 
@@ -74,122 +124,7 @@ header p {
   object-fit: contain;
 }
 
-/* FUNDO */
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("fundo.svg") center/cover no-repeat;
-  z-index: -1;
-}
-
-/* SETA */
-.menu-toggle {
-  position: fixed;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  z-index: 10;
-
-  animation: pulsar 1.5s infinite;
-}
-
-/* MENU LATERAL (CORRIGIDO) */
-.menu-lateral {
-  position: fixed;
-  top: 0;
-  right: -320px;
-  width: 320px;
-  height: 100vh; /* 👈 altura perfeita */
-
-  display: flex;
-  flex-direction: column;
-
-  background: rgba(255, 255, 255, 0);
-  overflow: hidden;
-
-  transition: 0.3s;
-}
-
-.menu-lateral.ativo {
-  right: 0;
-}
-
-.menu-lateral header {
-  text-align: center;
-  padding: 30px 20px 10px;
-}
-
-.menu-lateral .container {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-}
-
-.menu-lateral .section {
-  margin: 20px 0;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-
-.menu-lateral footer {
-  text-align: center;
-  padding: 15px;
-  font-size: 12px;
-}
-
-/* LINKS */
-h2 a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 300;
-}
-
-h2 a:hover {
-  color: #777;
-}
-
-/* SETA CUPIDO */
-.seta-cupido {
-  width: 60px;
-  height: 60px;
-}
-
-.seta-cupido line,
-.seta-cupido path {
-  stroke: red;
-  stroke-width: 3;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.menu-toggle:hover .seta-cupido {
-  transform: scale(1.1);
-}
-
-/* LIVROS */
-.livro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.livro img {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  object-fit: contain;
-}
-
-.livro .btn {
-  margin-top: 8px;
-}
-
-/* SINOPSE */
+/* SINOPSE (BOX) */
 .sinopse-box {
   display: none;
   position: fixed;
@@ -198,10 +133,8 @@ h2 a:hover {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.9);
-
   justify-content: center;
   align-items: center;
-
   z-index: 9999;
   cursor: pointer;
 }
@@ -211,140 +144,88 @@ h2 a:hover {
   padding: 30px;
   max-width: 500px;
   text-align: left;
+  border-radius: 5px;
 }
 
-.sinopse-conteudo h2 {
-  margin-top: 0;
-}
-
-/* ARTIGOS */
-.artigo img {
+/* MENU LATERAL E SETA */
+.menu-toggle {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
   cursor: pointer;
+  z-index: 10;
+  animation: pulsar 1.5s infinite;
 }
 
-/* ANIMAÇÃO */
-@keyframes pulsar {
-  0% {
-    transform: translateY(-50%) scale(1);
-  }
-  50% {
-    transform: translateY(-50%) scale(1.3);
-  }
-  100% {
-    transform: translateY(-50%) scale(1);
-  }
-}
-
-/* PLACEHOLDER */
-.placeholder {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px dashed #ccc;
-  color: #888;
-  font-size: 14px;
-  font-style: italic;
-  text-align: center;
-  padding: 10px;
+  flex-direction: column;
+  background: white; /* Ajustado para visibilidade */
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
 
+.menu-lateral.ativo {
+  right: 0;
+}
+
+.seta-cupido {
+  width: 60px;
+  height: 60px;
+}
+
+.seta-cupido line, .seta-cupido path {
+  stroke: red;
+  stroke-width: 3;
+  fill: none;
+}
+
+/* RODAPÉ FIXED */
 .footer-site {
   position: fixed;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  
   font-size: 12px;
-  color: #fdfcfc;
+  color: #666;
 }
 
-/* Adicione isso ao final do seu styles.css */
-@media (max-width: 600px) {
-  .galeria {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Cabe mais imagens por linha */
-    gap: 5px; /* Diminui o espaço entre elas */
-    padding: 10px;
-  }
-
-  .galeria img, .galeria video {
-    max-width: 100%; /* Garante que não ultrapasse a tela */
-  }
-
-  h1 {
-    font-size: 1.5rem; /* Diminui o título do site */
-  }
-}
-
-@media (max-width: 600px) {
-  .menu-lateral {
-    width: 80%; /* Ocupa 80% da tela em vez de um tamanho fixo */
-    right: -80%;
-  }
-  
-  .menu-lateral.ativo {
-    right: 0;
-  }
-}
-
-@media (max-width: 600px) {
-  .seta-cupido {
-    width: 45px; /* Seta um pouco menor no celular */
-    height: 45px;
-  }
-
-  .footer-site {
-    font-size: 10px; /* Texto do Copyright menor */
-    bottom: 5px;
-  }
-}
-
-/* Ajuste para o fundo não dar zoom excessivo no telemóvel */
-@media (max-width: 600px) {
-  .background {
-    /* Em vez de 'cover', usamos 'contain' para ver o desenho inteiro, 
-       ou ajustamos a posição para focar no que importa */
-    background-size: contain; 
-    background-position: top center;
-    background-repeat: repeat-y; /* Repete para baixo se a página for longa */
-    background-attachment: scroll; /* Melhora a performance em telemóveis antigos */
-  }
-}
-
+/* RESPONSIVIDADE (MOBILE) */
 @media (max-width: 600px) {
   .background {
     background-image: url("fundo-mobile.svg");
-    background-size: cover; /* Faz o desenho preencher a tela inteira */
-    background-position: center top; /* Garante que o topo do desenho apareça primeiro */
-    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+  }
+
+  .galeria {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .menu-lateral {
+    width: 80%;
+    right: -80%;
+  }
+
+  .seta-cupido {
+    width: 45px;
+    height: 45px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
   }
 }
 
-/* Estilo para o card de "Em Breve" */
-.livro-breve {
-  cursor: default !important; /* Mostra que não é clicável */
-}
-
-.moldura-pontilhada {
-  width: 100%;
-  height: 100%;
-  min-height: 300px; /* Ajuste para ficar do tamanho das suas capas de livro */
-  border: 2px dashed #ccc; /* Linha pontilhada cinza */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  text-align: center;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.05); /* Um fundo bem suave */
-}
-
-.moldura-pontilhada span {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-  color: #888;
-  font-style: italic;
+/* ANIMAÇÕES */
+@keyframes pulsar {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-50%) scale(1.2); }
 }

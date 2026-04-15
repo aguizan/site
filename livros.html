@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Livros Publicados - Anderson Guizan Silva</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,7 +16,6 @@
 
 <div class="galeria" id="galeria"></div>
 
-<!-- SINOPSE -->
 <div id="sinopse-box" class="sinopse-box">
   <div class="sinopse-conteudo">
     <h2 id="sinopse-titulo"></h2>
@@ -26,14 +24,13 @@
   </div>
 </div>
 
-<!-- DADOS -->
 <script src="livros.js"></script>
 
 <script>
 const galeria = document.getElementById("galeria");
 
+// 1. Carrega os livros do arquivo livros.js
 livros.forEach(livro => {
-
   const card = document.createElement("div");
   card.className = "livro";
 
@@ -41,34 +38,28 @@ livros.forEach(livro => {
   img.src = "livros/" + livro.img;
   img.loading = "lazy";
 
-  // clique abre sinopse
   card.onclick = () => {
     document.getElementById("sinopse-titulo").textContent = livro.titulo || "";
     document.getElementById("sinopse-texto").textContent = livro.sinopse;
-
     const link = document.getElementById("sinopse-link");
     link.href = livro.link;
-
     document.getElementById("sinopse-box").style.display = "flex";
   };
-
-  // 👉 ADICIONA O CARD "EM BREVE"
-const cardEmBreve = document.createElement("div");
-cardEmBreve.className = "livro livro-breve"; // Usaremos essa classe para o estilo pontilhado
-
-cardEmBreve.innerHTML = `
-  <div class="moldura-pontilhada">
-    <span>Em breve outro livro para você.</span>
-  </div>
-`;
-
-galeria.appendChild(cardEmBreve);
 
   card.appendChild(img);
   galeria.appendChild(card);
 });
 
-// fechar sinopse
+// 2. Adiciona o card "Em Breve" após o loop
+const cardEmBreve = document.createElement("div");
+// Ajustado para 'placeholder' para usar o estilo que definimos no CSS organizado
+cardEmBreve.className = "placeholder"; 
+
+cardEmBreve.innerHTML = `<span>Em breve outro livro para você.</span>`;
+
+galeria.appendChild(cardEmBreve);
+
+// 3. Fechar sinopse
 document.getElementById("sinopse-box").onclick = () => {
   document.getElementById("sinopse-box").style.display = "none";
 };
