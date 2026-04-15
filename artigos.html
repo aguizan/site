@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artigos - Anderson Guizan Silva</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Artigos</h1>
+</header>
+
+<div class="galeria" id="galeria"></div>
+
+<script src="artigos.js"></script>
+
+<script>
+const galeria = document.getElementById("galeria");
+
+artigos.forEach(item => {
+
+  // 👉 placeholder (em breve)
+  if (item.tipo === "placeholder") {
+
+    const aviso = document.createElement("div");
+    aviso.className = "placeholder";
+    aviso.textContent = "em breve, mais conteúdo...";
+
+    galeria.appendChild(aviso);
+    return;
+  }
+
+  // 👉 artigo normal
+  const card = document.createElement("div");
+  card.className = "artigo";
+
+  const img = document.createElement("img");
+  img.src = "img/artigos/" + item.img;
+  img.loading = "lazy";
+  img.alt = "Artigo";
+
+  card.onclick = () => {
+    window.open(item.link, "_blank");
+  };
+
+  card.appendChild(img);
+  galeria.appendChild(card);
+});
+</script>
+
+<footer>
+  <a href="index.html#menu">← Voltar</a>
+</footer>
+
+</body>
+</html>

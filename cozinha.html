@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Cozinha - Anderson Guizan Silva</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Minha Cozinha</h1>
+</header>
+
+<div class="galeria" id="galeria"></div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox"></div>
+
+<script>
+const itens = [
+  "coz-01.jpg",
+  "coz-02.jpg",
+  "coz-03.jpg",
+  "coz-04.jpg",
+  "coz-05.jpg",
+  "coz-06.jpg",
+  "coz-07.jpg",
+  "coz-08.mp4",
+  "coz-09.jpg",
+  "coz-10.jpg"
+];
+
+const galeria = document.getElementById("galeria");
+const lightbox = document.getElementById("lightbox");
+
+itens.forEach(nome => {
+
+  const caminho = "img/cozinha/" + nome;
+  const extensao = nome.split(".").pop().toLowerCase();
+
+  let elemento;
+
+  // 👉 IMAGENS
+  if (["jpg", "jpeg", "png", "webp"].includes(extensao)) {
+
+    elemento = document.createElement("img");
+    elemento.src = caminho;
+    elemento.loading = "lazy";
+    elemento.alt = "Imagem da cozinha";
+
+    elemento.onclick = () => {
+      lightbox.style.display = "flex";
+      lightbox.innerHTML = `<img src="${caminho}">`;
+    };
+  }
+
+  // 👉 VÍDEOS
+  if (["mp4", "webm"].includes(extensao)) {
+
+    elemento = document.createElement("video");
+    elemento.src = caminho;
+    elemento.muted = true;
+    elemento.loop = true;
+    elemento.autoplay = true;
+
+    elemento.onclick = () => {
+      lightbox.style.display = "flex";
+      lightbox.innerHTML = `
+        <video controls autoplay style="max-width:90%; max-height:80%;">
+          <source src="${caminho}" type="video/mp4">
+        </video>
+      `;
+    };
+  }
+
+  galeria.appendChild(elemento);
+});
+
+// fechar lightbox
+lightbox.onclick = () => {
+  lightbox.style.display = "none";
+  lightbox.innerHTML = "";
+};
+</script>
+
+<footer>
+  <a href="index.html#menu">← Voltar</a>
+</footer>
+
+</body>
+</html>
