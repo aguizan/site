@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livros Publicados - Anderson Guizan Silva</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Livros Publicados</h1>
+</header>
+
+<div class="galeria" id="galeria"></div>
+
+<!-- SINOPSE -->
+<div id="sinopse-box" class="sinopse-box">
+  <div class="sinopse-conteudo">
+    <h2 id="sinopse-titulo"></h2>
+    <p id="sinopse-texto"></p>
+    <a id="sinopse-link" class="btn" target="_blank">Comprar</a>
+  </div>
+</div>
+
+<!-- DADOS -->
+<script src="livros.js"></script>
+
+<script>
+const galeria = document.getElementById("galeria");
+
+livros.forEach(livro => {
+
+  const card = document.createElement("div");
+  card.className = "livro";
+
+  const img = document.createElement("img");
+  img.src = "livros/" + livro.img;
+  img.loading = "lazy";
+
+  // clique abre sinopse
+  card.onclick = () => {
+    document.getElementById("sinopse-titulo").textContent = livro.titulo || "";
+    document.getElementById("sinopse-texto").textContent = livro.sinopse;
+
+    const link = document.getElementById("sinopse-link");
+    link.href = livro.link;
+
+    document.getElementById("sinopse-box").style.display = "flex";
+  };
+
+  card.appendChild(img);
+  galeria.appendChild(card);
+});
+
+// fechar sinopse
+document.getElementById("sinopse-box").onclick = () => {
+  document.getElementById("sinopse-box").style.display = "none";
+};
+</script>
+
+<footer>
+  <a href="index.html#menu">← Voltar</a>
+</footer>
+
+</body>
+</html>
