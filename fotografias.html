@@ -42,7 +42,7 @@ const lightboxImg = document.getElementById("lightbox-img");
 
 imagens.forEach(nome => {
   const img = document.createElement("img");
-  img.src = "img/fotografias/" + nome;
+  img.src = "fotografias/" + nome;
   img.loading = "lazy";
 
   img.onclick = () => {
