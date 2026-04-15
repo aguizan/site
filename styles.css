@@ -313,3 +313,12 @@ h2 a:hover {
     background-attachment: scroll; /* Melhora a performance em telemóveis antigos */
   }
 }
+
+@media (max-width: 600px) {
+  .background {
+    background-image: url("fundo-mobile.svg");
+    background-size: cover; /* Faz o desenho preencher a tela inteira */
+    background-position: center top; /* Garante que o topo do desenho apareça primeiro */
+    background-repeat: no-repeat;
+  }
+}
