@@ -20,10 +20,6 @@
         .preco { font-weight: 400; font-size: 1.1em; color: #000; }
 
         .form-fisico { display: none; margin-top: 25px; border-top: 1px dotted #ccc; padding-top: 20px; }
-        .form-fisico input, .form-fisico textarea { 
-            width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; 
-            border-radius: 4px; font-family: 'Montserrat', sans-serif; 
-        }
         .btn-pagar { 
             background: #000; color: #fff; padding: 15px; width: 100%; border: none; 
             border-radius: 4px; cursor: pointer; font-size: 1em; margin-top: 15px;
@@ -49,31 +45,28 @@
 
     <div class="opcao-venda" onclick="mostrarFormFisico()">
         <h3>📚 Edição de Luxo (Artesanal) + E-book</h3>
-        <p>Impressão e encadernação manual por mim. Inclui autógrafo, marcador de página e você já recebe o e-book agora para ler enquanto aguarda o envio.</p>
+        <p>Impressão e encadernação manual por mim. Inclui autógrafo e marcador de página.</p>
         <div class="preco">R$ 89,90 + frete</div>
     </div>
 
     <div id="form-fisico" class="form-fisico">
-        <h3>Dados para o Autógrafo e Envio</h3>
-        <input type="text" id="nome" placeholder="Seu Nome Completo" required>
-        <input type="text" id="autografo" placeholder="Para quem vai o autógrafo?" required>
-        <input type="text" id="endereco" placeholder="Endereço Completo (Rua, nº, Bairro)" required>
-        <input type="text" id="cep" placeholder="CEP" required>
-        <textarea id="obs" placeholder="Alguma observação para o envio?"></textarea>
-        
-        <button class="btn-pagar" onclick="finalizarFisico()">Confirmar e Ir para Pagamento</button>
-    </div>
-</div>
+        <div style="background: #fdfdfd; padding: 25px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
+            <h3 style="margin-top: 0; font-weight: 400;">📚 Edição de Luxo Artesanal</h3>
+            <p style="color: #666; line-height: 1.6;">
+                Estou finalizando os detalhes da produção manual e encadernação desta edição especial. 
+                <br><strong>Em breve estaremos fornecendo seu livro impresso!</strong>
+            </p>
+            <button class="btn-pagar" onclick="avisarInteresse()">Quero ser avisado no lançamento</button>
+        </div>
+    </div> </div>
 
 <footer>
     <a href="livros.html">← Voltar para Galeria</a>
 </footer>
 
 <script>
-    // LINKS DO MERCADO PAGO (Substitua quando criá-los)
+    const SEU_WHATSAPP = "5521995751613";
     const LINK_PAGAMENTO_EBOOK = "https://link-do-mercado-pago-ebook.com";
-    const LINK_PAGAMENTO_FISICO = "https://link-do-mercado-pago-fisico.com";
-    const SEU_WHATSAPP = "5521995751613"; // Coloque seu número com DDD aqui
 
     function comprarEbook() {
         window.location.href = LINK_PAGAMENTO_EBOOK;
@@ -84,28 +77,10 @@
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
-    function finalizarFisico() {
-        const nome = document.getElementById('nome').value;
-        const autografo = document.getElementById('autografo').value;
-        const endereco = document.getElementById('endereco').value;
-        const cep = document.getElementById('cep').value;
-
-        if(!nome || !endereco || !cep) {
-            alert("Por favor, preencha os dados de entrega.");
-            return;
-        }
-
-        // Prepara a mensagem para o seu WhatsApp
-        const msg = `*NOVO PEDIDO ARTESANAL*\n\n` +
-                    `📖 Livro: A Promessa da Guanabara\n` +
-                    `👤 Cliente: ${nome}\n` +
-                    `✍️ Autógrafo: ${autografo}\n` +
-                    `📍 Endereço: ${endereco}\n` +
-                    `📮 CEP: ${cep}`;
-
-        // Abre o WhatsApp com os dados e redireciona para o pagamento
+    // NOVA FUNÇÃO QUE ESTAVA FALTANDO:
+    function avisarInteresse() {
+        const msg = `Olá Anderson! Tenho interesse na edição de luxo artesanal do livro 'A Promessa da Guanabara'. Me avise quando estiver disponível?`;
         window.open(`https://wa.me/${SEU_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
-        window.location.href = LINK_PAGAMENTO_FISICO;
     }
 </script>
 
