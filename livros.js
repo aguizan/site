@@ -17,11 +17,7 @@ sobrevive entre o concreto e a saudade. Uma obra sobre o que
 o tempo apaga, o que a tecnologia transforma e o que o
 coração se recusa a esquecer — um enigma que só se
 completa quando a última página é escrita.`,
-    link: "https://link-do-livro.com"
-  },
-  {
-    img: "liv-02.jpg",
-    sinopse: "Aqui entra a sinopse do livro 2.",
-    link: "https://link-do-livro.com"
-  }
+    link: "comprar.html"
+  } 
+  // O segundo item foi removido para eliminar o espaço vazio
 ];

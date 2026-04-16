@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - Anderson Guizan Silva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .checkout-box { max-width: 600px; margin: 40px auto; padding: 20px; background: #fff; border: 1px solid #eee; border-radius: 4px; }
+        .checkout-box h2 { font-weight: 300; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 25px; }
+        
+        .opcao-venda { 
+            padding: 20px; border: 1px solid #ddd; margin-bottom: 20px; border-radius: 4px; 
+            cursor: pointer; transition: all 0.3s ease; text-align: left;
+        }
+        .opcao-venda:hover { border-color: #333; background: #fdfdfd; }
+        .opcao-venda h3 { margin: 0 0 10px 0; font-weight: 400; color: #333; }
+        .opcao-venda p { font-size: 0.9em; color: #666; margin-bottom: 10px; }
+        .preco { font-weight: 400; font-size: 1.1em; color: #000; }
+
+        .form-fisico { display: none; margin-top: 25px; border-top: 1px dotted #ccc; padding-top: 20px; }
+        .form-fisico input, .form-fisico textarea { 
+            width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; 
+            border-radius: 4px; font-family: 'Montserrat', sans-serif; 
+        }
+        .btn-pagar { 
+            background: #000; color: #fff; padding: 15px; width: 100%; border: none; 
+            border-radius: 4px; cursor: pointer; font-size: 1em; margin-top: 15px;
+        }
+        .btn-pagar:hover { background: #333; }
+        footer { margin-top: 30px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Finalizar Pedido</h1>
+</header>
+
+<div class="checkout-box">
+    <h2>Como deseja ler "A Promessa da Guanabara"?</h2>
+
+    <div class="opcao-venda" onclick="comprarEbook()">
+        <h3>📱 Edição Digital (E-book)</h3>
+        <p>Receba o arquivo PDF/Epub imediatamente no seu e-mail após a confirmação.</p>
+        <div class="preco">R$ 29,90</div>
+    </div>
+
+    <div class="opcao-venda" onclick="mostrarFormFisico()">
+        <h3>📚 Edição de Luxo (Artesanal) + E-book</h3>
+        <p>Impressão e encadernação manual por mim. Inclui autógrafo, marcador de página e você já recebe o e-book agora para ler enquanto aguarda o envio.</p>
+        <div class="preco">R$ 89,90 + frete</div>
+    </div>
+
+    <div id="form-fisico" class="form-fisico">
+        <h3>Dados para o Autógrafo e Envio</h3>
+        <input type="text" id="nome" placeholder="Seu Nome Completo" required>
+        <input type="text" id="autografo" placeholder="Para quem vai o autógrafo?" required>
+        <input type="text" id="endereco" placeholder="Endereço Completo (Rua, nº, Bairro)" required>
+        <input type="text" id="cep" placeholder="CEP" required>
+        <textarea id="obs" placeholder="Alguma observação para o envio?"></textarea>
+        
+        <button class="btn-pagar" onclick="finalizarFisico()">Confirmar e Ir para Pagamento</button>
+    </div>
+</div>
+
+<footer>
+    <a href="livros.html">← Voltar para Galeria</a>
+</footer>
+
+<script>
+    // LINKS DO MERCADO PAGO (Substitua quando criá-los)
+    const LINK_PAGAMENTO_EBOOK = "https://link-do-mercado-pago-ebook.com";
+    const LINK_PAGAMENTO_FISICO = "https://link-do-mercado-pago-fisico.com";
+    const SEU_WHATSAPP = "5521995751613"; // Coloque seu número com DDD aqui
+
+    function comprarEbook() {
+        window.location.href = LINK_PAGAMENTO_EBOOK;
+    }
+
+    function mostrarFormFisico() {
+        document.getElementById('form-fisico').style.display = 'block';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function finalizarFisico() {
+        const nome = document.getElementById('nome').value;
+        const autografo = document.getElementById('autografo').value;
+        const endereco = document.getElementById('endereco').value;
+        const cep = document.getElementById('cep').value;
+
+        if(!nome || !endereco || !cep) {
+            alert("Por favor, preencha os dados de entrega.");
+            return;
+        }
+
+        // Prepara a mensagem para o seu WhatsApp
+        const msg = `*NOVO PEDIDO ARTESANAL*\n\n` +
+                    `📖 Livro: A Promessa da Guanabara\n` +
+                    `👤 Cliente: ${nome}\n` +
+                    `✍️ Autógrafo: ${autografo}\n` +
+                    `📍 Endereço: ${endereco}\n` +
+                    `📮 CEP: ${cep}`;
+
+        // Abre o WhatsApp com os dados e redireciona para o pagamento
+        window.open(`https://wa.me/${SEU_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+        window.location.href = LINK_PAGAMENTO_FISICO;
+    }
+</script>
+
+</body>
+</html>
