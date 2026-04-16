@@ -38,11 +38,25 @@ livros.forEach(livro => {
   img.src = "livros/" + livro.img;
   img.loading = "lazy";
 
-  card.onclick = () => {
+  card.onclick = (e) => {
+    // Evita que o clique feche a box imediatamente
+    e.stopPropagation(); 
+    
     document.getElementById("sinopse-titulo").textContent = livro.titulo || "";
-    document.getElementById("sinopse-texto").textContent = livro.sinopse;
+    
+    // ATIVADO: Agora a sinopse vai aparecer na tela
+    document.getElementById("sinopse-texto").innerText = livro.sinopse;
+    
     const link = document.getElementById("sinopse-link");
     link.href = livro.link;
+
+    // REMOVENDO o target="_blank" para links internos (comprar.html)
+    if (livro.link.includes(".html")) {
+        link.removeAttribute("target");
+    } else {
+        link.setAttribute("target", "_blank");
+    }
+
     document.getElementById("sinopse-box").style.display = "flex";
   };
 
@@ -50,18 +64,17 @@ livros.forEach(livro => {
   galeria.appendChild(card);
 });
 
-// 2. Adiciona o card "Em Breve" após o loop
+// 2. Adiciona o card "Em Breve"
 const cardEmBreve = document.createElement("div");
-// Ajustado para 'placeholder' para usar o estilo que definimos no CSS organizado
 cardEmBreve.className = "placeholder"; 
-
 cardEmBreve.innerHTML = `<span>Em breve outro livro para você.</span>`;
-
 galeria.appendChild(cardEmBreve);
 
-// 3. Fechar sinopse
-document.getElementById("sinopse-box").onclick = () => {
-  document.getElementById("sinopse-box").style.display = "none";
+// 3. Fechar sinopse ao clicar fora do conteúdo
+document.getElementById("sinopse-box").onclick = function(e) {
+  if (e.target === this) {
+    this.style.display = "none";
+  }
 };
 </script>
 
