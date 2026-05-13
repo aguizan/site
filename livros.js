@@ -17,7 +17,6 @@ sobrevive entre o concreto e a saudade. Uma obra sobre o que
 o tempo apaga, o que a tecnologia transforma e o que o
 coração se recusa a esquecer — um enigma que só se
 completa quando a última página é escrita.`,
-    link: "comprar.html"
-  } 
-  // O segundo item foi removido para eliminar o espaço vazio
+    link: "https://www.amazon.com.br/Promessa-Guanabara-Anderson-Guizan-Silva-ebook/dp/B0GXCD4LGY"
+  }
 ];

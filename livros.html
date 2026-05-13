@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Livros Publicados - Anderson Guizan Silva</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -16,11 +17,15 @@
 
 <div class="galeria" id="galeria"></div>
 
+<!-- SINOPSE -->
 <div id="sinopse-box" class="sinopse-box">
   <div class="sinopse-conteudo">
     <h2 id="sinopse-titulo"></h2>
     <p id="sinopse-texto"></p>
-    <a id="sinopse-link" class="btn" target="_blank">Comprar</a>
+
+    <a id="sinopse-link" class="btn" target="_blank" rel="noopener noreferrer">
+      Comprar na Amazon
+    </a>
   </div>
 </div>
 
@@ -29,7 +34,7 @@
 <script>
 const galeria = document.getElementById("galeria");
 
-// 1. Carrega os livros do arquivo livros.js
+// 1. Carrega livros
 livros.forEach(livro => {
   const card = document.createElement("div");
   card.className = "livro";
@@ -39,24 +44,21 @@ livros.forEach(livro => {
   img.loading = "lazy";
 
   card.onclick = (e) => {
-    // Evita que o clique feche a box imediatamente
-    e.stopPropagation(); 
-    
+    e.stopPropagation();
+
+    // Título
     document.getElementById("sinopse-titulo").textContent = livro.titulo || "";
-    
-    // ATIVADO: Agora a sinopse vai aparecer na tela
+
+    // Sinopse
     document.getElementById("sinopse-texto").innerText = livro.sinopse;
-    
+
+    // Link Amazon
     const link = document.getElementById("sinopse-link");
     link.href = livro.link;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
 
-    // REMOVENDO o target="_blank" para links internos (comprar.html)
-    if (livro.link.includes(".html")) {
-        link.removeAttribute("target");
-    } else {
-        link.setAttribute("target", "_blank");
-    }
-
+    // Mostrar box
     document.getElementById("sinopse-box").style.display = "flex";
   };
 
@@ -64,13 +66,13 @@ livros.forEach(livro => {
   galeria.appendChild(card);
 });
 
-// 2. Adiciona o card "Em Breve"
+// 2. Card "Em breve"
 const cardEmBreve = document.createElement("div");
-cardEmBreve.className = "placeholder"; 
+cardEmBreve.className = "placeholder";
 cardEmBreve.innerHTML = `<span>Em breve outro livro para você.</span>`;
 galeria.appendChild(cardEmBreve);
 
-// 3. Fechar sinopse ao clicar fora do conteúdo
+// 3. Fechar sinopse ao clicar fora
 document.getElementById("sinopse-box").onclick = function(e) {
   if (e.target === this) {
     this.style.display = "none";
